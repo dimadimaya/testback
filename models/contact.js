@@ -12,30 +12,36 @@ const contactSchema = Schema(
     },
     phone: {
       type: String,
+      minlength: 6,
     },
     favorite: {
       type: Boolean,
       default: false,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      require: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
 
-const joiSchema = Joi.object({
+const joiAddContactSchema = Joi.object({
   name: Joi.string().min(3).required(),
   email: Joi.string().email().required(),
-  phone: Joi.number().min(7).required(),
-  favorite: Joi.bool(),
+  phone: Joi.number().required(),
+  favorite: Joi.boolean(),
 });
 
-const favoriteJoiSchema = Joi.object({
-  favorite: Joi.bool().required(),
+const joiFavoriteSchema = Joi.object({
+  favorite: Joi.boolean().required(),
 });
 
 const Contact = model("contact", contactSchema);
 
 module.exports = {
   Contact,
-  joiSchema,
-  favoriteJoiSchema,
+  joiAddContactSchema,
+  joiFavoriteSchema,
 };
