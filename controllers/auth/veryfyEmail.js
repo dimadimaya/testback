@@ -2,14 +2,14 @@ const { User } = require("../../models");
 const { NotFound } = require("http-errors");
 
 const verifyEmail = async (req, res) => {
-  const { token } = req.params;
-  const user = await User.findOne({ token });
+  const { verificationToken } = req.params;
+  const user = await User.findOne({ verificationToken });
   if (!user) {
     throw new NotFound("User not found");
   }
   await User.findByIdAndUpdate(user._id, {
     verify: true,
-    token: "",
+    verificationToken: "",
   });
   res.json({
     message: "Verification successful",

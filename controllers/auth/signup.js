@@ -13,18 +13,18 @@ const signup = async (req, res) => {
   }
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   const avatarURL = gravatar.url(email);
-  const token = v4();
+  const verificationToken = v4();
   const result = await User.create({
     email,
     password: hashPassword,
     subscription,
     avatarURL,
-    token,
+    verificationToken,
   });
   const mail = {
     to: email,
     subject: "confirm registration",
-    html: `<a href="http://localhost:3000/api/auth/verify/"${token} target="_blank">click to confirm registration</a>`,
+    html: `<a href="http://localhost:3000/api/auth/verify/"${verificationToken} target="_blank">click to confirm registration</a>`,
   };
   await sendEmail(mail);
   res.status(201).json({
