@@ -8,6 +8,7 @@ module.exports = {
   signup,
   login,
   logout,
+
   // veryfyEmail,
   // resendVerifyEmail,
 };
