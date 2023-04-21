@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post("/signup", validation(joiSignupSchema), ctrlWrapper(ctrl.signup));
 
-router.get("/verify/:verificationToken", ctrlWrapper(ctrl.veryfyEmail));
+// router.get("/verify/:verificationToken", ctrlWrapper(ctrl.veryfyEmail));
 
 // router.post(
 //   "/verify",

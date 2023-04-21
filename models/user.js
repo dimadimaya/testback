@@ -4,6 +4,11 @@ const bcrypt = require("bcryptjs");
 
 const userSchema = Schema(
   {
+    name: {
+      type: String,
+      minlength: 6,
+      required: [true, "Name is required"],
+    },
     password: {
       type: String,
       minlength: 6,
@@ -14,15 +19,15 @@ const userSchema = Schema(
       required: [true, "Email is required"],
       unique: true,
     },
-    subscription: {
-      type: String,
-      enum: ["starter", "pro", "business"],
-      default: "starter",
-    },
-    avatarURL: {
-      type: String,
-      required: true,
-    },
+    // subscription: {
+    //   type: String,
+    //   enum: ["starter", "pro", "business"],
+    //   default: "starter",
+    // },
+    // avatarURL: {
+    //   type: String,
+    //   required: true,
+    // },
     token: {
       type: String,
       default: null,
@@ -44,6 +49,7 @@ userSchema.methods.comparePassword = function (password) {
 };
 
 const joiSignupSchema = Joi.object({
+  name: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.number().required(),
   subscription: Joi.string(),
@@ -54,9 +60,9 @@ const joiLoginSchema = Joi.object({
   password: Joi.number().required(),
 });
 
-const joiSubscriptionSchema = Joi.object({
-  subscription: Joi.string().valid("starter", "pro", "business").required(),
-});
+// const joiSubscriptionSchema = Joi.object({
+//   subscription: Joi.string().valid("starter", "pro", "business").required(),
+// });
 
 // const joiVerifyEmailSchema = Joi.object({
 //   email: Joi.string().email().required(),
@@ -68,6 +74,6 @@ module.exports = {
   User,
   joiSignupSchema,
   joiLoginSchema,
-  joiSubscriptionSchema,
+  // joiSubscriptionSchema,
   // joiVerifyEmailSchema,
 };
