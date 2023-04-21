@@ -13,13 +13,13 @@ const signup = async (req, res) => {
   }
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   const avatarURL = gravatar.url(email);
-  const verificationToken = v4();
+  const token = v4();
   const result = await User.create({
     email,
     password: hashPassword,
     subscription,
     avatarURL,
-    verificationToken,
+    token,
   });
   const mail = {
     to: email,
