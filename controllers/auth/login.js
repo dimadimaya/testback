@@ -10,9 +10,9 @@ const login = async (req, res) => {
   if (!user || !user.comparePassword(password)) {
     throw new Unauthorized("Email or password is wrong");
   }
-  if (!user.verify) {
-    throw new BadRequest("Email not verify");
-  }
+  // if (!user.verify) {
+  //   throw new BadRequest("Email not verify");
+  // }
 
   const payload = {
     id: user._id,
