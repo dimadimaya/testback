@@ -22,12 +22,10 @@ const login = async (req, res) => {
   res.json({
     status: "seccess",
     code: 200,
-    data: {
-      token,
-      user: {
-        email: user.email,
-        subscription: user.subscription,
-      },
+    token,
+    user: {
+      email: user.email,
+      subscription: user.subscription,
     },
   });
 };
